@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
+    /* ========== GLOBAL ========== */
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     :root {
       --bg: #0b0e14;
@@ -31,7 +32,7 @@
     img { max-width: 100%; display: block; }
     .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
-    /* HEADER */
+    /* ========== HEADER ========== */
     header {
       position: sticky; top: 0;
       background: rgba(11,14,20,0.95);
@@ -57,27 +58,36 @@
       font-size: 0.75rem; font-weight: 700;
     }
 
-    /* HERO */
-    .hero { text-align: center; padding: 50px 20px 30px; }
+    /* ========== HERO ========== */
+    .hero { text-align: center; padding: 50px 20px 20px; }
     .hero h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 10px; }
     .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-    /* FILTERS */
+    /* ========== FILTERS ========== */
+    .filter-section { padding: 15px 0; }
+    .filter-label {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
     .filters {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
-      padding: 20px 0 10px;
+      gap: 8px;
     }
     .filter-btn {
       background: var(--card);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 8px 20px;
+      padding: 7px 18px;
       border-radius: 30px;
       cursor: pointer;
       font-weight: 500;
+      font-size: 0.85rem;
       transition: 0.3s;
     }
     .filter-btn:hover, .filter-btn.active {
@@ -86,7 +96,7 @@
       border-color: var(--gold);
     }
 
-    /* PRODUCT GRID */
+    /* ========== PRODUCT GRID ========== */
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -121,17 +131,30 @@
     .product-image img {
       width: 100%; height: 100%; object-fit: cover;
     }
-    .product-badge {
+    .product-brand {
       position: absolute;
       top: 10px;
       left: 10px;
       background: var(--gold);
       color: #000;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 20px;
       text-transform: uppercase;
+    }
+    .product-type-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
     }
     .product-info {
       padding: 18px;
@@ -139,9 +162,9 @@
       flex-direction: column;
       flex: 1;
     }
-    .product-info h3 { font-size: 1.1rem; margin-bottom: 3px; }
+    .product-info h3 { font-size: 1.05rem; margin-bottom: 3px; }
     .product-info .type {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--gold);
       font-weight: 600;
       text-transform: uppercase;
@@ -172,7 +195,7 @@
     }
     .add-btn:hover { background: var(--gold2); }
 
-    /* CART MODAL */
+    /* ========== CART MODAL ========== */
     .cart-modal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -242,7 +265,7 @@
     }
     .checkout-btn:hover { background: #1ebe5c; }
 
-    /* CHECKOUT FORM */
+    /* ========== CHECKOUT FORM ========== */
     .checkout-form {
       display: none; margin-top: 20px;
       border-top: 1px solid var(--border); padding-top: 20px;
@@ -269,7 +292,7 @@
     }
     .order-whatsapp-btn:hover { background: #1ebe5c; }
 
-    /* FOOTER */
+    /* ========== FOOTER ========== */
     footer {
       text-align: center; padding: 30px 20px;
       border-top: 1px solid var(--border);
@@ -278,14 +301,15 @@
     footer p { margin: 6px 0; }
     footer i { color: var(--gold); margin-right: 6px; }
 
-    /* RESPONSIVE */
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 600px) {
       .hero h1 { font-size: 1.8rem; }
       .products { grid-template-columns: 1fr 1fr; gap: 15px; }
       .product-image { height: 130px; font-size: 2.5rem; }
-      .product-info h3 { font-size: 1rem; }
+      .product-info h3 { font-size: 0.95rem; }
       .product-info .price { font-size: 1.1rem; }
       .add-btn { font-size: 0.85rem; padding: 8px; }
+      .filter-btn { padding: 6px 14px; font-size: 0.8rem; }
       .cart-content { padding: 18px; }
       .cart-item { flex-direction: column; align-items: flex-start; gap: 8px; }
       .cart-item-actions { width: 100%; justify-content: space-between; }
@@ -309,18 +333,35 @@
   <section class="hero">
     <div class="container">
       <h1>Desmond Accessories</h1>
-      <p>Phone pouches for iPhone, Samsung, Android and more — plus chargers, headsets, power banks, and screen guards.</p>
+      <p>Phone pouches, chargers, headsets, power banks and more for iPhone, Samsung, Android.</p>
     </div>
   </section>
 
-  <!-- FILTERS -->
-  <div class="container">
-    <div class="filters" id="filters">
-      <button class="filter-btn active" data-brand="all">All</button>
+  <!-- BRAND FILTERS -->
+  <div class="container filter-section">
+    <div class="filter-label">Filter by Brand</div>
+    <div class="filters" id="brandFilters">
+      <button class="filter-btn active" data-brand="all">All Brands</button>
       <button class="filter-btn" data-brand="iPhone">iPhone</button>
       <button class="filter-btn" data-brand="Samsung">Samsung</button>
       <button class="filter-btn" data-brand="Android">Android</button>
-      <button class="filter-btn" data-brand="Other">Other</button>
+      <button class="filter-btn" data-brand="Universal">Universal</button>
+    </div>
+  </div>
+
+  <!-- TYPE FILTERS -->
+  <div class="container filter-section">
+    <div class="filter-label">Filter by Type</div>
+    <div class="filters" id="typeFilters">
+      <button class="filter-btn active" data-type="all">All Types</button>
+      <button class="filter-btn" data-type="Leather Pouch">Leather Pouch</button>
+      <button class="filter-btn" data-type="Silicone Pouch">Silicone Pouch</button>
+      <button class="filter-btn" data-type="Wallet Pouch">Wallet Pouch</button>
+      <button class="filter-btn" data-type="Flip Case">Flip Case</button>
+      <button class="filter-btn" data-type="Charger">Charger</button>
+      <button class="filter-btn" data-type="Headset">Headset</button>
+      <button class="filter-btn" data-type="Power Bank">Power Bank</button>
+      <button class="filter-btn" data-type="Screen Guard">Screen Guard</button>
     </div>
   </div>
 
@@ -337,11 +378,11 @@
         <button class="close-cart" onclick="toggleCart()">&times;</button>
       </h2>
       <div id="cartItems"></div>
-:      <div class="cart-total">
-        < "span>Total</span>
-Other        <span id="cartTotal">$",0.00</span>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
       </div>
- type      <button class="checkout-btn": onclick="showCheckout()">
+      <button class="checkout-btn" onclick="showCheckout()">
         <i class="fa-solid fa-credit-card"></i> Proceed to Checkout
       </button>
 
@@ -378,25 +419,47 @@ Other        <span id="cartTotal">$",0.00</span>
   <script>
     /* ============================================
        PRODUCTS DATABASE
-       Edit this array to add/remove products.
+       - brand: iPhone / Samsung / Android / Universal
+       - type: Leather Pouch / Silicone Pouch / Wallet Pouch / Flip Case / Charger / Headset / Power Bank / Screen Guard
+       - Use emoji OR image: "filename.jpg"
        ============================================ */
     const products = [
+      // ===== iPHONE PRODUCTS =====
       { id: 1, name: "iPhone Leather Pouch", brand: "iPhone", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for iPhone" },
-      { id: 2, name: "iPhone Silicone Pouch", brand: "iPhone", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch" },
+      { id: 2, name: "iPhone Silicone Pouch", brand: "iPhone", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch for iPhone" },
       { id: 3, name: "iPhone Wallet Pouch", brand: "iPhone", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch with card slots" },
-      { id: 4, name: "Samsung Leather Pouch", brand: "Samsung", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for Samsung" },
-      { id: 5, name: "Samsung Silicone Pouch", brand: "Samsung", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch" },
-      { id: 6, name: "Samsung Wallet Pouch", brand: "Samsung", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch for Samsung" },
-      { id: 7, name: "Android Leather Pouch", brand: "Android", type: "Leather Pouch", price: 22.00, emoji: "👝", desc: "Leather pouch for Android phones" },
-      { id: 8, name: "Android Silicone Pouch", brand: "Android", type: "Silicone Pouch", price: 14.00, emoji: "📱", desc: "Silicone pouch for Android" },
-      { id: 9, name: "Fast Charger", brand: "Other", type: "Charger", price: 20.00, emoji: "🔌", desc: "20W fast charging adapter" },
-      { id: 10, name: "Wireless Headset", brand: "Other", type: "Headset", price: 45.00, emoji: "🎧", desc: "Bluetooth headset with mic" },
-      { id: 11, name: "Power Bank 20000mAh", brand "Power Bank", price: 40.00, emoji: "🔋", desc: "Dual USB power bank" },
-      { id: 12, name: "Screen Guard", brand: "Other", type: "Screen Guard", price: 10.00, emoji: "📱", desc: "Tempered glass protector" }
+      { id: 4, name: "iPhone Flip Case", brand: "iPhone", type: "Flip Case", price: 28.00, emoji: "📒", desc: "Flip cover case for iPhone" },
+      { id: 5, name: "iPhone Fast Charger", brand: "iPhone", type: "Charger", price: 25.00, emoji: "🔌", desc: "20W fast charging adapter" },
+      { id: 6, name: "iPhone Wireless Charger", brand: "iPhone", type: "Charger", price: 35.00, emoji: "⚡", desc: "Wireless charging pad for iPhone" },
+
+      // ===== SAMSUNG PRODUCTS =====
+      { id: 7, name: "Samsung Leather Pouch", brand: "Samsung", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for Samsung" },
+      { id: 8, name: "Samsung Silicone Pouch", brand: "Samsung", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch for Samsung" },
+      { id: 9, name: "Samsung Wallet Pouch", brand: "Samsung", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch for Samsung" },
+      { id: 10, name: "Samsung Flip Case", brand: "Samsung", type: "Flip Case", price: 28.00, emoji: "📒", desc: "Flip cover case for Samsung" },
+      { id: 11, name: "Samsung Fast Charger", brand: "Samsung", type: "Charger", price: 25.00, emoji: "🔌", desc: "25W fast charging adapter" },
+      { id: 12, name: "Samsung Wireless Charger", brand: "Samsung", type: "Charger", price: 35.00, emoji: "⚡", desc: "Wireless charging pad for Samsung" },
+
+      // ===== ANDROID PRODUCTS =====
+      { id: 13, name: "Android Leather Pouch", brand: "Android", type: "Leather Pouch", price: 22.00, emoji: "👝", desc: "Leather pouch for Android phones" },
+      { id: 14, name: "Android Silicone Pouch", brand: "Android", type: "Silicone Pouch", price: 14.00, emoji: "📱", desc: "Silicone pouch for Android" },
+      { id: 15, name: "Android Wallet Pouch", brand: "Android", type: "Wallet Pouch", price: 28.00, emoji: "👛", desc: "Wallet-style pouch for Android" },
+      { id: 16, name: "Android Flip Case", brand: "Android", type: "Flip Case", price: 25.00, emoji: "📒", desc: "Flip cover case for Android" },
+      { id: 17, name: "Android Fast Charger", brand: "Android", type: "Charger", price: 22.00, emoji: "🔌", desc: "Fast charging adapter for Android" },
+      { id: 18, name: "Android Car Charger", brand: "Android", type: "Charger", price: 18.00, emoji: "🚗", desc: "Dual port car charger" },
+
+      // ===== UNIVERSAL / ACCESSORIES =====
+      { id: 19, name: "Power Bank 20000mAh", brand: "Universal", type: "Power Bank", price: 40.00, emoji: "🔋", desc: "Dual USB power bank" },
+      { id: 20, name: "Wireless Headset", brand: "Universal", type: "Headset", price: 45.00, emoji: "🎧", desc: "Bluetooth headset with mic" },
+      { id: 21, name: "Over-Ear Headphones", brand: "Universal", type: "Headset", price: 65.00, emoji: "🎵", desc: "Noise cancelling headphones" },
+      { id: 22, name: "Tempered Glass Screen Guard", brand: "Universal", type: "Screen Guard", price: 10.00, emoji: "🛡️", desc: "9H tempered glass protector" },
+      { id: 23, name: "Privacy Screen Guard", brand: "Universal", type: "Screen Guard", price: 18.00, emoji: "🔒", desc: "Anti-spy privacy glass" },
+      { id: 24, name: "USB-C Cable", brand: "Universal", type: "Charger", price: 12.00, emoji: "🔗", desc: "Fast charging USB-C cable" },
+      { id: 25, name: "Lightning Cable", brand: "iPhone", type: "Charger", price: 15.00, emoji: "🔗", desc: "Fast charging Lightning cable" }
     ];
 
     /* ============================================
-       CART SYSTEM (localStorage)
+       CART SYSTEM
        ============================================ */
     let cart = [];
     try {
@@ -492,7 +555,6 @@ Other        <span id="cartTotal">$",0.00</span>
     /* ============================================
        WHATSAPP ORDER
        Number: +234 (0) 904 797 4587
-       Format for WhatsApp: 2349047974587
        ============================================ */
     const WHATSAPP_NUMBER = '2349047974587';
 
@@ -532,18 +594,22 @@ Other        <span id="cartTotal">$",0.00</span>
     }
 
     /* ============================================
-       RENDER PRODUCTS WITH FILTER
+       FILTERS
        ============================================ */
     let currentBrand = 'all';
+    let currentType = 'all';
 
     function renderProducts() {
       const grid = document.getElementById('productGrid');
+
       const filtered = products.filter(p => {
-        return currentBrand === 'all' || p.brand === currentBrand;
+        const brandMatch = currentBrand === 'all' || p.brand === currentBrand;
+        const typeMatch = currentType === 'all' || p.type === currentType;
+        return brandMatch && typeMatch;
       });
 
       if (filtered.length === 0) {
-        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);grid-column:1/-1;padding:40px 0;">No products in this category yet.</p>';
+        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);grid-column:1/-1;padding:40px 0;">No products found in this category.</p>';
         return;
       }
 
@@ -554,10 +620,11 @@ Other        <span id="cartTotal">$",0.00</span>
             <div class="product-image">
               ${p.image ? `<img src="${p.image}" alt="${p.name}">` : p.emoji}
             </div>
-            <div class="product-badge">${p.brand}</div>
+            <div class="product-brand">${p.brand}</div>
+            <div class="product-type-badge">${p.type}</div>
             <div class="product-info">
               <h3>${p.name}</h3>
-              <div class="type">${p.type || ''}</div>
+              <div class="type">${p.type}</div>
               <div class="desc">${p.desc || ''}</div>
               <div class="price">$${p.price.toFixed(2)}</div>
               <button class="add-btn" onclick="addToCart(${p.id})">
@@ -570,14 +637,20 @@ Other        <span id="cartTotal">$",0.00</span>
       grid.innerHTML = html;
     }
 
-    /* ============================================
-       FILTER BUTTONS
-       ============================================ */
-    document.getElementById('filters').addEventListener('click', function(e) {
+    document.getElementById('brandFilters').addEventListener('click', function(e) {
       if (e.target.classList.contains('filter-btn')) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('#brandFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
         e.target.classList.add('active');
         currentBrand = e.target.dataset.brand;
+        renderProducts();
+      }
+    });
+
+    document.getElementById('typeFilters').addEventListener('click', function(e) {
+      if (e.target.classList.contains('filter-btn')) {
+        document.querySelectorAll('#typeFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        currentType = e.target.dataset.type;
         renderProducts();
       }
     });
