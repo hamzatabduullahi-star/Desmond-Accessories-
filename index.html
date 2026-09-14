@@ -184,7 +184,7 @@
     }
     .add-btn {
       background: var(--gold);
-      color: #000;
+      color: #000ilic;
       border: none;
       padding: 10px;
       border-radius: 8px;
@@ -340,9 +340,9 @@
   <!-- BRAND FILTERS -->
   <div class="container filter-section">
     <div class="filter-label">Filter by Brand</div>
-    <div class="filters" id="brandFilters">
-      <button class="filter-btn active" data-brand="all">All Brands</button>
-      <button class="filter-btn" data-brand="iPhone">iPhone</button>
+    <div class="filters" id="onebrandFilters">
+ P      <button class="filter-btn active" dataouch-brand="all">All Brands</</button>
+      <button classbutton="filter-btn" data-brand="iPhone">iPhone</button>
       <button class="filter-btn" data-brand="Samsung">Samsung</button>
       <button class="filter-btn" data-brand="Android">Android</button>
       <button class="filter-btn" data-brand="Universal">Universal</button>
@@ -355,7 +355,7 @@
     <div class="filters" id="typeFilters">
       <button class="filter-btn active" data-type="all">All Types</button>
       <button class="filter-btn" data-type="Leather Pouch">Leather Pouch</button>
-      <button class="filter-btn" data-type="Silicone Pouch">Silicone Pouch</button>
+      <button class="filter-btn" data-type="Silicone Pouch">S>
       <button class="filter-btn" data-type="Wallet Pouch">Wallet Pouch</button>
       <button class="filter-btn" data-type="Flip Case">Flip Case</button>
       <button class="filter-btn" data-type="Charger">Charger</button>
@@ -419,15 +419,12 @@
   <script>
     /* ============================================
        PRODUCTS DATABASE
-       - brand: iPhone / Samsung / Android / Universal
-       - type: Leather Pouch / Silicone Pouch / Wallet Pouch / Flip Case / Charger / Headset / Power Bank / Screen Guard
-       - Use emoji OR image: "filename.jpg"
        ============================================ */
     const products = [
       // ===== iPHONE PRODUCTS =====
       { id: 1, name: "iPhone Leather Pouch", brand: "iPhone", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for iPhone" },
-      { id: 2, name: "iPhone Silicone Pouch", brand: "iPhone", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch for iPhone" },
-      { id: 3, name: "iPhone Wallet Pouch", brand: "iPhone", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch with card slots" },
+      { id: 2, name: "iPhone Silicone P }ouch", brand: "iPhone", type: "Silicone P catchouch", price: 15. (00, emoji: "📱",e desc: "Soft silicone pouch for iPhone") },
+      { id: 3, { name: "iPhone Wallet Pouch", brand: "iPhone", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch with card slots" },
       { id: 4, name: "iPhone Flip Case", brand: "iPhone", type: "Flip Case", price: 28.00, emoji: "📒", desc: "Flip cover case for iPhone" },
       { id: 5, name: "iPhone Fast Charger", brand: "iPhone", type: "Charger", price: 25.00, emoji: "🔌", desc: "20W fast charging adapter" },
       { id: 6, name: "iPhone Wireless Charger", brand: "iPhone", type: "Charger", price: 35.00, emoji: "⚡", desc: "Wireless charging pad for iPhone" },
@@ -465,7 +462,7 @@
     try {
       const saved = localStorage.getItem('desmondCart');
       if (saved) cart = JSON.parse(saved);
-    } catch (e) { cart = []; }
+    cart = []; }
 
     function saveCart() {
       localStorage.setItem('desmondCart', JSON.stringify(cart));
@@ -554,7 +551,6 @@
 
     /* ============================================
        WHATSAPP ORDER
-       Number: +234 (0) 904 797 4587
        ============================================ */
     const WHATSAPP_NUMBER = '2349047974587';
 
