@@ -1,676 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Desmond Accessories - Order Online</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    :root {
-      --bg: #0b0e14;
-      --card: #151a23;
-      --gold: #d4af37;
-      --gold2: #f6d365;
-      --text: #e0e0e0;
-      --text-muted: #8892a0;
-      --border: rgba(255,255,255,0.08);
-      --radius: 14px;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-
-    header {
-      position: sticky; top: 0;
-      background: rgba(11,14,20,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      padding: 12px 0;
-    }
-    .header-inner { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 700; color: var(--gold); }
-    .logo span { color: #fff; font-weight: 300; }
-    .cart-btn {
-      background: var(--gold); color: #000; border: none;
-      padding: 10px 18px; border-radius: 30px; font-weight: 600;
-      cursor: pointer; display: flex; align-items: center; gap: 8px;
-      transition: 0.3s;
-    }
-    .cart-btn:hover { background: var(--gold2); transform: scale(1.02); }
-    .cart-count {
-      background: #e63946; color: #fff; border-radius: 50%;
-      width: 22px; height: 22px; display: inline-flex;
-      align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 700;
-    }
-
-    .hero { text-align: center; padding: 50px 20px 20px; }
-    .hero h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 10px; }
-    .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-
-    .filter-section { padding: 15px 0; }
-    .filter-label {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
-    .filter-btn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 7px 18px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 0.85rem;
-      transition: 0.3s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--gold);
-      color: #000;
-      border-color: var(--gold);
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-      padding: 20px 0 60px;
-    }
-    .product-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: 0.3s;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .product-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-      box-shadow: 0 12px 30px rgba(212,175,55,0.1);
-    }
-    .product-image {
-      height: 200px;
-      background: #1a1f2b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      color: var(--gold);
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .product-image img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .product-brand {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: var(--gold);
-      color: #000;
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-    .product-type-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.75);
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      z-index: 2;
-    }
-    .product-info {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .product-info h3 { font-size: 1.05rem; margin-bottom: 3px; }
-    .product-info .type {
-      font-size: 0.72rem;
-      color: var(--gold);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-    .product-info .desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-    .product-info .price {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-    .add-btn {
-      background: var(--gold);
-      color: #000;
-      border: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: auto;
-    }
-    .add-btn:hover { background: var(--gold2); }
-
-    .cart-modal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .cart-modal.open { display: flex; }
-    .cart-content {
-      background: var(--card);
-      border-radius: var(--radius);
-      max-width: 600px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 25px;
-      border: 1px solid var(--border);
-      position: relative;
-    }
-    .cart-content h2 {
-      color: var(--gold);
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .close-cart {
-      background: none; border: none; color: var(--text-muted);
-      font-size: 1.5rem; cursor: pointer;
-    }
-    .cart-item {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 0; border-bottom: 1px solid var(--border);
-    }
-    .cart-item-info { display: flex; align-items: center; gap: 12px; }
-    .cart-item-info .emoji { font-size: 1.8rem; }
-    .cart-item-info .name { font-weight: 500; }
-    .cart-item-info .price { font-size: 0.9rem; color: var(--gold); }
-    .cart-item-actions { display: flex; align-items: center; gap: 8px; }
-    .qty-btn {
-      width: 30px; height: 30px; border: none;
-      background: var(--gold); color: #000; border-radius: 6px;
-      font-weight: 700; cursor: pointer;
-    }
-    .qty-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .qty { min-width: 25px; text-align: center; font-weight: 600; }
-    .remove-btn {
-      background: #e63946; color: #fff; border: none;
-      padding: 6px 10px; border-radius: 6px; cursor: pointer;
-      font-size: 0.8rem;
-    }
-    .cart-total {
-      display: flex; justify-content: space-between;
-      font-size: 1.3rem; font-weight: 700;
-      margin: 20px 0; color: var(--gold);
-    }
-    .checkout-btn {
-      width: 100%; background: #25D366; color: #fff;
-      border: none; padding: 14px; border-radius: 10px;
-      font-weight: 700; font-size: 1.1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; transition: 0.3s;
-    }
-    .checkout-btn:hover { background: #1ebe5c; }
-
-    .checkout-form {
-      display: none; margin-top: 20px;
-      border-top: 1px solid var(--border); padding-top: 20px;
-    }
-    .checkout-form.open { display: block; }
-    .checkout-form h3 { margin-bottom: 12px; color: var(--gold); }
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 0.9rem; margin-bottom: 4px; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 10px 12px; border-radius: 8px;
-      border: 1px solid var(--border); background: #0b0e14;
-      color: #fff; font-family: inherit; font-size: 0.95rem;
-    }
-    .form-group textarea { resize: vertical; min-height: 70px; }
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--gold);
-    }
-    .order-whatsapp-btn {
-      width: 100%; background: #25D366; color: #fff;
-      border: none; padding: 14px; border-radius: 10px;
-      font-weight: 700; font-size: 1.1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; margin-top: 10px;
-    }
-    .order-whatsapp-btn:hover { background: #1ebe5c; }
-
-    footer {
-      text-align: center; padding: 30px 20px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted); font-size: 0.9rem;
-    }
-    footer p { margin: 6px 0; }
-    footer i { color: var(--gold); margin-right: 6px; }
-
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 1.8rem; }
-      .products { grid-template-columns: 1fr 1fr; gap: 15px; }
-      .product-image { height: 140px; font-size: 2.5rem; }
-      .product-info h3 { font-size: 0.95rem; }
-      .product-info .price { font-size: 1.1rem; }
-      .add-btn { font-size: 0.85rem; padding: 8px; }
-      .filter-btn { padding: 6px 14px; font-size: 0.8rem; }
-      .cart-content { padding: 18px; }
-      .cart-item { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .cart-item-actions { width: 100%; justify-content: space-between; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desmond Accessories - Order Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+:root{--bg:#0b0e14;--card:#151a23;--gold:#d4af37;--gold2:#f6d365;--text:#e0e0e0;--text-muted:#8892a0;--border:rgba(255,255,255,0.08);--radius:14px}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{width:90%;max-width:1200px;margin:0 auto}
+header{position:sticky;top:0;background:rgba(11,14,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:12px 0}
+.header-inner{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.5rem;font-weight:700;color:var(--gold)}
+.logo span{color:#fff;font-weight:300}
+.cart-btn{background:var(--gold);color:#000;border:none;padding:10px 18px;border-radius:30px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:0.3s;font-family:inherit}
+.cart-btn:hover{background:var(--gold2);transform:scale(1.02)}
+.cart-count{background:#e63946;color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700}
+.hero{text-align:center;padding:50px 20px 20px}
+.hero h1{font-size:2.5rem;color:var(--gold);margin-bottom:10px}
+.hero p{color:var(--text-muted);max-width:600px;margin:0 auto}
+.filter-section{padding:15px 0}
+.filter-label{text-align:center;font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:7px 18px;border-radius:30px;cursor:pointer;font-weight:500;font-size:0.85rem;transition:0.3s;font-family:inherit}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;padding:20px 0 60px}
+.product-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;transition:0.3s;display:flex;flex-direction:column;position:relative}
+.product-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 12px 30px rgba(212,175,55,0.1)}
+.product-image{height:200px;background:#1a1f2b;display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--gold);border-bottom:1px solid var(--border);overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover}
+.product-brand{position:absolute;top:10px;left:10px;background:var(--gold);color:#000;font-size:0.65rem;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;z-index:2}
+.product-type-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.75);color:#fff;font-size:0.65rem;font-weight:600;padding:4px 10px;border-radius:20px;text-transform:uppercase;border:1px solid var(--border);z-index:2}
+.product-info{padding:18px;display:flex;flex-direction:column;flex:1}
+.product-info h3{font-size:1.05rem;margin-bottom:3px}
+.product-info .type{font-size:0.72rem;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.product-info .desc{font-size:0.85rem;color:var(--text-muted);margin-bottom:10px}
+.product-info .price{font-size:1.3rem;font-weight:700;color:var(--gold);margin-bottom:12px}
+.add-btn{background:var(--gold);color:#000;border:none;padding:10px;border-radius:8px;font-weight:600;cursor:pointer;transition:0.3s;margin-top:auto;font-family:inherit}
+.add-btn:hover{background:var(--gold2)}
+.cart-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.cart-modal.open{display:flex}
+.cart-content{background:var(--card);border-radius:var(--radius);max-width:600px;width:100%;max-height:90vh;overflow-y:auto;padding:25px;border:1px solid var(--border)}
+.cart-content h2{color:var(--gold);margin-bottom:15px;display:flex;justify-content:space-between;align-items:center}
+.close-cart{background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.cart-item-info{display:flex;align-items:center;gap:12px}
+.cart-item-info .emoji{font-size:1.8rem}
+.cart-item-info .name{font-weight:500}
+.cart-item-info .price{font-size:0.9rem;color:var(--gold)}
+.cart-item-actions{display:flex;align-items:center;gap:8px}
+.qty-btn{width:30px;height:30px;border:none;background:var(--gold);color:#000;border-radius:6px;font-weight:700;cursor:pointer}
+.qty-btn:disabled{opacity:0.4;cursor:not-allowed}
+.qty{min-width:25px;text-align:center;font-weight:600}
+.remove-btn{background:#e63946;color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:0.8rem}
+.cart-total{display:flex;justify-content:space-between;font-size:1.3rem;font-weight:700;margin:20px 0;color:var(--gold)}
+.checkout-btn{width:100%;background:#25D366;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:0.3s;font-family:inherit}
+.checkout-btn:hover{background:#1ebe5c}
+.checkout-form{display:none;margin-top:20px;border-top:1px solid var(--border);padding-top:20px}
+.checkout-form.open{display:block}
+.checkout-form h3{margin-bottom:12px;color:var(--gold)}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:0.9rem;margin-bottom:4px}
+.form-group input,.form-group textarea{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:#0b0e14;color:#fff;font-family:inherit;font-size:0.95rem}
+.form-group textarea{resize:vertical;min-height:70px}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--gold)}
+.order-whatsapp-btn{width:100%;background:#25D366;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-family:inherit}
+.order-whatsapp-btn:hover{background:#1ebe5c}
+footer{text-align:center;padding:30px 20px;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.9rem}
+footer p{margin:6px 0}
+footer i{color:var(--gold);margin-right:6px}
+@media (max-width:600px){
+.hero h1{font-size:1.8rem}
+.products{grid-template-columns:1fr 1fr;gap:15px}
+.product-image{height:140px;font-size:2.5rem}
+.product-info h3{font-size:0.95rem}
+.product-info .price{font-size:1.1rem}
+.add-btn{font-size:0.85rem;padding:8px}
+.filter-btn{padding:6px 14px;font-size:0.8rem}
+.cart-content{padding:18px}
+.cart-item{flex-direction:column;align-items:flex-start;gap:8px}
+.cart-item-actions{width:100%;justify-content:space-between}
+}
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="container header-inner">
-      <div class="logo">Desmond <span>Accessories</span></div>
-      <button class="cart-btn" onclick="toggleCart()">
-        <i class="fa-solid fa-cart-shopping"></i> Cart
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-    </div>
-  </header>
+<header>
+<div class="container header-inner">
+<div class="logo">Desmond <span>Accessories</span></div>
+<button class="cart-btn" onclick="toggleCart()">
+<i class="fa-solid fa-cart-shopping"></i> Cart
+<span class="cart-count" id="cartCount">0</span>
+</button>
+</div>
+</header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Desmond Accessories</h1>
-      <p>Phone pouches, chargers, headsets, power banks and more for iPhone, Samsung, Android.</p>
-    </div>
-  </section>
+<section class="hero">
+<div class="container">
+<h1>Desmond Accessories</h1>
+<p>Phone pouches, chargers, headsets, power banks and more for iPhone, Samsung, Android.</p>
+</div>
+</section>
 
-  <div class="container filter-section">
-    <div class="filter-label">Filter by Brand</div>
-    <div class="filters" id="brandFilters">
-      <button class="filter-btn active" data-brand="all">All Brands</button>
-      <button class="filter-btn" data-brand="iPhone">iPhone</button>
-      <button class="filter-btn" data-brand="Samsung">Samsung</button>
-      <button class="filter-btn" data-brand="Android">Android</button>
-      <button class="filter-btn" data-brand="Universal">Universal</button>
-    </div>
-  </div>
+<div class="container filter-section">
+<div class="filter-label">Filter by Brand</div>
+<div class="filters" id="brandFilters">
+<button class="filter-btn active" data-brand="all">All Brands</button>
+<button class="filter-btn" data-brand="iPhone">iPhone</button>
+<button class="filter-btn" data-brand="Samsung">Samsung</button>
+<button class="filter-btn" data-brand="Android">Android</button>
+<button class="filter-btn" data-brand="Universal">Universal</button>
+</div>
+</div>
 
-  <div class="container filter-section">
-    <div class {="filter-label">Filter by Type</div>
-    < iddiv class="filters" id="typeFilters">
-:      <button class="filter-btn active" data-type=" all">All Types</button>
-      <6,button class="filter-btn" data-type="Leather Pouch">Leather Pouch</button>
-      <button class="filter-btn" data-type="Silicone Pouch">Silicone Pouch</button>
-      <button class="filter-btn" data-type="Wallet Pouch">Wallet Pouch</button>
-      <button class="filter-btn" data-type="Flip Case">Flip Case</button>
-      <button class="filter-btn" data-type="Charger">Charger</button>
-      <button class="filter-btn" data-type="Headset">Headset</button>
-      <button class="filter-btn" data-type="Power Bank">Power Bank</button>
-      <button class="filter-btn" data-type="Screen Guard">Screen Guard</button>
-    </div>
-  </div>
+<div class="container filter-section">
+<div class="filter-label">Filter by Type</div>
+<div class="filters" id="typeFilters">
+<button class="filter-btn active" data-type="all">All Types</button>
+<button class="filter-btn" data-type="Leather Pouch">Leather Pouch</button>
+<button class="filter-btn" data-type="Silicone Pouch">Silicone Pouch</button>
+<button class="filter-btn" data-type="Wallet Pouch">Wallet Pouch</button>
+<button class="filter-btn" data-type="Flip Case">Flip Case</button>
+<button class="filter-btn" data-type="Charger">Charger</button>
+<button class="filter-btn" data-type="Headset">Headset</button>
+<button class="filter-btn" data-type="Power Bank">Power Bank</button>
+<button class="filter-btn" data-type="Screen Guard">Screen Guard</button>
+</div>
+</div>
 
-  <div class="container">
-    <div class="products" id="productGrid"></div>
-  </div>
+<div class="container">
+<div class="products" id="productGrid"></div>
+</div>
 
-  <div class="cart-modal" id="cartModal">
-    <div class="cart-content">
-      <h2>
-        Your Cart
-        <button class="close-cart" onclick="toggleCart()">&times;</button>
-      </h2>
-      <div id="cartItems"></div>
-      <div class="cart-total">
-        <span>Total</span>
-        <span id="cartTotal">$0.00</span>
-      </div>
-      <button class="checkout-btn" onclick="showCheckout()">
-        <i class="fa-solid fa-credit-card"></i> Proceed to Checkout
-      </button>
+<div class="cart-modal" id="cartModal">
+<div class="cart-content">
+<h2>Your Cart <button class="close-cart" onclick="toggleCart()">&times;</button></h2>
+<div id="cartItems"></div>
+<div class="cart-total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+<button class="checkout-btn" onclick="showCheckout()"><i class="fa-solid fa-credit-card"></i> Proceed to Checkout</button>
+<div class="checkout-form" id="checkoutForm">
+<h3>Delivery Details</h3>
+<div class="form-group"><label>Full Name</label><input type="text" id="custName" placeholder="Your name"></div>
+<div class="form-group"><label>Phone Number</label><input type="tel" id="custPhone" placeholder="Your phone"></div>
+<div class="form-group"><label>Delivery Address</label><textarea id="custAddress" placeholder="Street, city, state"></textarea></div>
+<button class="order-whatsapp-btn" onclick="orderViaWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Order via WhatsApp</button>
+</div>
+</div>
+</div>
 
-      <div class="checkout-form" id="checkoutForm">
-        <h3>Delivery Details</h3>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="custName" placeholder="Your name" required>
-        </div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" id="custPhone" placeholder="Your phone" required>
-        </div>
-        <div class="form-group">
-          <label>Delivery Address</label>
-          <textarea id="custAddress" placeholder="Street, city, state" required></textarea>
-        </div>
-        <button class="order-whatsapp-btn" onclick="orderViaWhatsApp()">
-          <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
+<footer>
+<div class="container">
+<p><i class="fa-solid fa-location-dot"></i> Akeesan Market opposite Atiba town Hall</p>
+<p><i class="fa-solid fa-phone"></i> +234 (0) 904 797 4587</p>
+<p style="margin-top:12px;">&copy; 2026 Desmond Accessories. All rights reserved.</p>
+</div>
+</footer>
 
-  <footer>
-    <div class="container">
-      <p><i class="fa-solid fa-location-dot"></i> Akeesan Market opposite Atiba town Hall</p>
-      <p><i class="fa-solid fa-phone"></i> +234 (0) 904 797 4587</p>
-      <p style="margin-top:12px;">&copy; 2026 Desmond Accessories. All rights reserved.</p>
-    </div>
-  </footer>
+<script>
+const products=[
+{id:1,name:"iPhone Leather Pouch",brand:"iPhone",type:"Leather Pouch",price:25.00,emoji:"👝",desc:"Premium leather pouch for iPhone"},
+{id:2,name:"iPhone Silicone Pouch",brand:"iPhone",type:"Silicone Pouch",price:15.00,emoji:"📱",desc:"Soft silicone pouch for iPhone"},
+{id:3,name:"iPhone Wallet Pouch",brand:"iPhone",type:"Wallet Pouch",price:30.00,emoji:"👛",desc:"Wallet-style pouch with card slots"},
+{id:4,name:"iPhone Flip Case",brand:"iPhone",type:"Flip Case",price:28.00,emoji:"📒",desc:"Flip cover case for iPhone"},
+{id:5,name:"iPhone Fast Charger",brand:"iPhone",type:"Charger",price:25.00,image:"https://i.imgur.com/k8TOT0X.jpeg",desc:"20W fast charging adapter"},
+{id:6,name:"iPhone Wireless Charger",brand:"iPhone",type:"Charger",price:35.00,image:"https://i.imgur.com/nXUFiQz.jpeg",desc:"Wireless charging pad for iPhone"},
+{id:7,name:"Samsung Leather Pouch",brand:"Samsung",type:"Leather Pouch",price:25.00,emoji:"👝",desc:"Premium leather pouch for Samsung"},
+{id:8,name:"Samsung Silicone Pouch",brand:"Samsung",type:"Silicone Pouch",price:15.00,emoji:"📱",desc:"Soft silicone pouch for Samsung"},
+{id:9,name:"Samsung Wallet Pouch",brand:"Samsung",type:"Wallet Pouch",price:30.00,emoji:"👛",desc:"Wallet-style pouch for Samsung"},
+{id:10,name:"Samsung Flip Case",brand:"Samsung",type:"Flip Case",price:28.00,emoji:"📒",desc:"Flip cover case for Samsung"},
+{id:11,name:"Samsung Fast Charger",brand:"Samsung",type:"Charger",price:25.00,emoji:"🔌",desc:"25W fast charging adapter"},
+{id:12,name:"Samsung Wireless Charger",brand:"Samsung",type:"Charger",price:35.00,emoji:"⚡",desc:"Wireless charging pad for Samsung"},
+{id:13,name:"Android Leather Pouch",brand:"Android",type:"Leather Pouch",price:22.00,emoji:"👝",desc:"Leather pouch for Android phones"},
+{id:14,name:"Android Silicone Pouch",brand:"Android",type:"Silicone Pouch",price:14.00,emoji:"📱",desc:"Silicone pouch for Android"},
+{id:15,name:"Android Wallet Pouch",brand:"Android",type:"Wallet Pouch",price:28.00,emoji:"👛",desc:"Wallet-style pouch for Android"},
+{id:16,name:"Android Flip Case",brand:"Android",type:"Flip Case",price:25.00,emoji:"📒",desc:"Flip cover case for Android"},
+{id:17,name:"Android Fast Charger",brand:"Android",type:"Charger",price:22.00,emoji:"🔌",desc:"Fast charging adapter for Android"},
+{id:18,name:"Android Car Charger",brand:"Android",type:"Charger",price:18.00,emoji:"🚗",desc:"Dual port car charger"},
+{id:19,name:"Power Bank 20000mAh",brand:"Universal",type:"Power Bank",price:40.00,emoji:"🔋",desc:"Dual USB power bank"},
+{id:20,name:"Wireless Headset",brand:"Universal",type:"Headset",price:45.00,emoji:"🎧",desc:"Bluetooth headset with mic"},
+{id:21,name:"Over-Ear Headphones",brand:"Universal",type:"Headset",price:65.00,emoji:"🎵",desc:"Noise cancelling headphones"},
+{id:22,name:"Tempered Glass Screen Guard",brand:"Universal",type:"Screen Guard",price:10.00,image:"https://i.imgur.com/csg2gbb.jpeg",desc:"9H tempered glass protector"},
+{id:23,name:"Privacy Screen Guard",brand:"Universal",type:"Screen Guard",price:18.00,image:"https://i.imgur.com/ZeSvBvL.jpeg",desc:"Anti-spy privacy glass"},
+{id:24,name:"USB-C Cable",brand:"Universal",type:"Charger",price:12.00,emoji:"🔗",desc:"Fast charging USB-C cable"},
+{id:25,name:"Lightning Cable",brand:"iPhone",type:"Charger",price:15.00,image:"https://i.imgur.com/LS6qaZe.jpeg",desc:"Fast charging Lightning cable"}
+];
 
-  <script>
-    /* ============================================
-       PRODUCTS DATABASE
-       - image: use Imgur direct link (https://i.imgur.com/...)
-       - emoji: fallback if no image
-       ============================================ */
-    const products = [
-      // ===== iPHONE PRODUCTS =====
-      { id: 1, name: "iPhone Leather Pouch", brand: "iPhone", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for iPhone" },
-      { id: 2, name: "iPhone Silicone Pouch", brand: "iPhone", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch for iPhone" },
-      { id: 3, name: "iPhone Wallet Pouch", brand: "iPhone", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch with card slots" },
-      { id: 4, name: "iPhone Flip Case", brand: "iPhone", type: "Flip Case", price: 28.00, emoji: "📒", desc: "Flip cover case for iPhone" },
-      { id: 5, name: "iPhone Fast Charger", brand: "iPhone", type: "Charger", price: 25.00, image: "https://i.imgur.com/k8TOT0X.jpeg", desc: "20W fast charging adapter" },
-      name: "iPhone Wireless Charger", brand: "iPhone", type: "Charger", price: 35.00, image: "https://i.imgur.com/nXUFiQz.jpeg", desc: "Wireless charging pad for iPhone" },
+let cart=[];
+try{const s=localStorage.getItem('desmondCart');if(s)cart=JSON.parse(s);}catch(e){cart=[];}
 
-      // ===== SAMSUNG PRODUCTS =====
-      { id: 7, name: "Samsung Leather Pouch", brand: "Samsung", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for Samsung" },
-      { id: 8, name: "Samsung Silicone Pouch", brand: "Samsung", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch for Samsung" },
-      { id: 9, name: "Samsung Wallet Pouch", brand: "Samsung", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch for Samsung" },
-      { id: 10, name: "Samsung Flip Case", brand: "Samsung", type: "Flip Case", price: 28.00, emoji: "📒", desc: "Flip cover case for Samsung" },
-      { id: 11, name: "Samsung Fast Charger", brand: "Samsung", type: "Charger", price: 25.00, emoji: "🔌", desc: "25W fast charging adapter" },
-      { id: 12, name: "Samsung Wireless Charger", brand: "Samsung", type: "Charger", price: 35.00, emoji: "⚡", desc: "Wireless charging pad for Samsung" },
+function saveCart(){localStorage.setItem('desmondCart',JSON.stringify(cart));updateCartUI();}
 
-      // ===== ANDROID PRODUCTS =====
-      { id: 13, name: "Android Leather Pouch", brand: "Android", type: "Leather Pouch", price: 22.00, emoji: "👝", desc: "Leather pouch for Android phones" },
-      { id: 14, name: "Android Silicone Pouch", brand: "Android", type: "Silicone Pouch", price: 14.00, emoji: "📱", desc: "Silicone pouch for Android" },
-      { id: 15, name: "Android Wallet Pouch", brand: "Android", type: "Wallet Pouch", price: 28.00, emoji: "👛", desc: "Wallet-style pouch for Android" },
-      { id: 16, name: "Android Flip Case", brand: "Android", type: "Flip Case", price: 25.00, emoji: "📒", desc: "Flip cover case for Android" },
-      { id: 17, name: "Android Fast Charger", brand: "Android", type: "Charger", price: 22.00, emoji: "🔌", desc: "Fast charging adapter for Android" },
-      { id: 18, name: "Android Car Charger", brand: "Android", type: "Charger", price: 18.00, emoji: "🚗", desc: "Dual port car charger" },
+function addToCart(id){
+const p=products.find(x=>x.id===id);
+if(!p)return;
+const ex=cart.find(x=>x.id===id);
+if(ex){ex.quantity+=1;}else{cart.push({id:p.id,name:p.name,price:p.price,emoji:p.emoji||'📦',quantity:1});}
+saveCart();
+showNotification(p.name+' added to cart!');
+}
 
-      // ===== UNIVERSAL / ACCESSORIES =====
-      { id: 19, name: "Power Bank 20000mAh", brand: "Universal", type: "Power Bank", price: 40.00, emoji: "🔋", desc: "Dual USB power bank" },
-      { id: 20, name: "Wireless Headset", brand: "Universal", type: "Headset", price: 45.00, emoji: "🎧", desc: "Bluetooth headset with mic" },
-      { id: 21, name: "Over-Ear Headphones", brand: "Universal", type: "Headset", price: 65.00, emoji: "🎵", desc: "Noise cancelling headphones" },
-      { id: 22, name: "Tempered Glass Screen Guard", brand: "Universal", type: "Screen Guard", price: 10.00, image: "https://i.imgur.com/csg2gbb.jpeg", desc: "9H tempered glass protector" },
-      { id: 23, name: "Privacy Screen Guard", brand: "Universal", type: "Screen Guard", price: 18.00, image: "https://i.imgur.com/ZeSvBvL.jpeg", desc: "Anti-spy privacy glass" },
-      { id: 24, name: "USB-C Cable", brand: "Universal", type: "Charger", price: 12.00, emoji: "🔗", desc: "Fast charging USB-C cable" },
-      { id: 25, name: "Lightning Cable", brand: "iPhone", type: "Charger", price: 15.00, image: "https://i.imgur.com/LS6qaZe.jpeg", desc: "Fast charging Lightning cable" }
-    ];
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();}
 
-    /* ============================================
-       CART SYSTEM
-       ============================================ */
-    let cart = [];
-    try {
-      const saved = localStorage.getItem('desmondCart');
-      if (saved) cart = JSON.parse(saved);
-    } catch (e) { cart = []; }
+function updateQuantity(id,ch){
+const it=cart.find(x=>x.id===id);
+if(!it)return;
+const n=it.quantity+ch;
+if(n<=0){removeFromCart(id);return;}
+it.quantity=n;saveCart();
+}
 
-    function saveCart() {
-      localStorage.setItem('desmondCart', JSON.stringify(cart));
-      updateCartUI();
-    }
+function updateCartUI(){
+const total=cart.reduce((s,x)=>s+x.quantity,0);
+document.getElementById('cartCount').textContent=total;
+const div=document.getElementById('cartItems');
+if(cart.length===0){
+div.innerHTML='<p style="text-align:center;color:var(--text-muted);padding:20px 0;">Your cart is empty.</p>';
+document.getElementById('cartTotal').textContent='$0.00';
+return;
+}
+let h='';let t=0;
+cart.forEach(it=>{
+const itT=it.price*it.quantity;t+=itT;
+h+='<div class="cart-item"><div class="cart-item-info"><span class="emoji">'+it.emoji+'</span><div><div class="name">'+it.name+'</div><div class="price">$'+it.price.toFixed(2)+'</div></div></div><div class="cart-item-actions"><button class="qty-btn" onclick="updateQuantity('+it.id+',-1)" '+(it.quantity<=1?'disabled':'')+'>−</button><span class="qty">'+it.quantity+'</span><button class="qty-btn" onclick="updateQuantity('+it.id+',1)">+</button><button class="remove-btn" onclick="removeFromCart('+it.id+')">✕</button></div></div>';
+});
+div.innerHTML=h;
+document.getElementById('cartTotal').textContent='$'+t.toFixed(2);
+}
 
-    function addToCart(productId) {
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
-      const existing = cart.find(item => item.id === productId);
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          emoji: product.emoji || '📦',
-          quantity: 1
-        });
-      }
-      saveCart();
-      showNotification(`${product.name} added to cart!`);
-    }
+function toggleCart(){document.getElementById('cartModal').classList.toggle('open');}
+function showCheckout(){
+if(cart.length===0){alert('Your cart is empty!');return;}
+document.getElementById('checkoutForm').classList.toggle('open');
+}
 
-    function removeFromCart(productId) {
-      cart = cart.filter(item => item.id !== productId);
-      saveCart();
-    }
+const WHATSAPP_NUMBER='2349047974587';
 
-    function updateQuantity(productId, change) {
-      const item = cart.find(i => i.id === productId);
-      if (!item) return;
-      const newQty = item.quantity + change;
-      if (newQty <= 0) { removeFromCart(productId); return; }
-      item.quantity = newQty;
-      saveCart();
-    }
+function orderViaWhatsApp(){
+const n=document.getElementById('custName').value.trim();
+const p=document.getElementById('custPhone').value.trim();
+const a=document.getElementById('custAddress').value.trim();
+if(!n||!p||!a){alert('Please fill in all delivery details.');return;}
+let m='🛒 *NEW ORDER - Desmond Accessories*%0A%0A';
+m+='👤 *Customer:* '+n+'%0A';
+m+='📞 *Phone:* '+p+'%0A';
+m+='📍 *Address:* '+a+'%0A%0A';
+m+='📦 *Items:*%0A';
+let t=0;
+cart.forEach(it=>{
+const itT=it.price*it.quantity;t+=itT;
+m+='• '+it.emoji+' '+it.name+' x'+it.quantity+' = $'+itT.toFixed(2)+'%0A';
+});
+m+='%0A💰 *Total:* $'+t.toFixed(2)+'%0A%0AThank you!';
+window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+m,'_blank');
+cart=[];saveCart();
+document.getElementById('checkoutForm').classList.remove('open');
+toggleCart();
+}
 
-    function updateCartUI() {
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-      document.getElementById('cartCount').textContent = totalItems;
+let currentBrand='all';
+let currentType='all';
 
-      const cartItemsDiv = document.getElementById('cartItems');
-      if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px 0;">Your cart is empty.</p>';
-        document.getElementById('cartTotal').textContent = '$0.00';
-        return;
-      }
+function renderProducts(){
+const g=document.getElementById('productGrid');
+const f=products.filter(p=>{
+const b=currentBrand==='all'||p.brand===currentBrand;
+const t=currentType==='all'||p.type===currentType;
+return b&&t;
+});
+if(f.length===0){
+g.innerHTML='<p style="text-align:center;color:var(--text-muted);grid-column:1/-1;padding:40px 0;">No products found in this category.</p>';
+return;
+}
+let h='';
+f.forEach(p=>{
+let img='';
+if(p.image){
+img='<img src="'+p.image+'" alt="'+p.name+'">';
+}else{
+img=p.emoji;
+}
+h+='<div class="product-card"><div class="product-image">'+img+'</div><div class="product-brand">'+p.brand+'</div><div class="product-type-badge">'+p.type+'</div><div class="product-info"><h3>'+p.name+'</h3><div class="type">'+p.type+'</div><div class="desc">'+(p.desc||'')+'</div><div class="price">$'+p.price.toFixed(2)+'</div><button class="add-btn" onclick="addToCart('+p.id+')"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button></div></div>';
+});
+g.innerHTML=h;
+}
 
-      let html = '';
-      let total = 0;
-      cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        html += `
-          <div class="cart-item">
-            <div class="cart-item-info">
-              <span class="emoji">${item.emoji}</span>
-              <div>
-                <div class="name">${item.name}</div>
-                <div class="price">$${item.price.toFixed(2)}</div>
-              </div>
-            </div>
-            <div class="cart-item-actions">
-              <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>−</button>
-              <span class="qty">${item.quantity}</span>
-              <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-              <button class="remove-btn" onclick="removeFromCart(${item.id})">✕</button>
-            </div>
-          </div>
-        `;
-      });
-      cartItemsDiv.innerHTML = html;
-      document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
-    }
+document.getElementById('brandFilters').addEventListener('click',function(e){
+if(e.target.classList.contains('filter-btn')){
+document.querySelectorAll('#brandFilters .filter-btn').forEach(b=>b.classList.remove('active'));
+e.target.classList.add('active');
+currentBrand=e.target.dataset.brand;
+renderProducts();
+}
+});
 
-    function toggleCart() {
-      document.getElementById('cartModal').classList.toggle('open');
-    }
+document.getElementById('typeFilters').addEventListener('click',function(e){
+if(e.target.classList.contains('filter-btn')){
+document.querySelectorAll('#typeFilters .filter-btn').forEach(b=>b.classList.remove('active'));
+e.target.classList.add('active');
+currentType=e.target.dataset.type;
+renderProducts();
+}
+});
 
-    function showCheckout() {
-      if (cart.length === 0) { alert('Your cart is empty!'); return; }
-      document.getElementById('checkoutForm').classList.toggle('open');
-    }
+function showNotification(msg){
+const o=document.querySelector('.notif');
+if(o)o.remove();
+const nf=document.createElement('div');
+nf.className='notif';
+nf.textContent=msg;
+nf.style.cssText='position:fixed;top:80px;right:20px;background:#151a23;color:#fff;padding:14px 20px;border-radius:10px;border-left:4px solid #d4af37;box-shadow:0 8px 25px rgba(0,0,0,0.5);font-family:Poppins,sans-serif;z-index:2000;transform:translateX(120%);opacity:0;transition:0.4s';
+document.body.appendChild(nf);
+setTimeout(function(){nf.style.transform='translateX(0)';nf.style.opacity='1';},50);
+setTimeout(function(){nf.style.transform='translateX(120%)';nf.style.opacity='0';setTimeout(function(){nf.remove();},400);},3000);
+}
 
-    /* ============================================
-       WHATSAPP ORDER
-       ============================================ */
-    const WHATSAPP_NUMBER = '2349047974587';
-
-    function orderViaWhatsApp() {
-      const name = document.getElementById('custName').value.trim();
-      const phone = document.getElementById('custPhone').value.trim();
-      const address = document.getElementById('custAddress').value.trim();
-
-      if (!name || !phone || !address) {
-        alert('Please fill in all delivery details.');
-        return;
-      }
-
-      let message = '🛒 *NEW ORDER - Desmond Accessories*%0A%0A';
-      message += '👤 *Customer:* ' + name + '%0A';
-      message += '📞 *Phone:* ' + phone + '%0A';
-      message += '📍 *Address:* ' + address + '%0A%0A';
-      message += '📦 *Items:*%0A';
-
-      let total = 0;
-      cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        message += `• ${item.emoji} ${item.name} x${item.quantity} = $${itemTotal.toFixed(2)}%0A`;
-      });
-
-      message += `%0A💰 *Total:* $${total.toFixed(2)}%0A%0A`;
-      message += 'Thank you!';
-
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
-      window.open(url, '_blank');
-
-      cart = [];
-      saveCart();
-      document.getElementById('checkoutForm').classList.remove('open');
-      toggleCart();
-    }
-
-    /* ============================================
-       FILTERS
-       ============================================ */
-    let currentBrand = 'all';
-    let currentType = 'all';
-
-    function renderProducts() {
-      const grid = document.getElementById('productGrid');
-
-      const filtered = products.filter(p => {
-        const brandMatch = currentBrand === 'all' || p.brand === currentBrand;
-        const typeMatch = currentType === 'all' || p.type === currentType;
-        return brandMatch && typeMatch;
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);grid-column:1/-1;padding:40px 0;">No products found in this category.</p>';
-        return;
-      }
-
-      let html = '';
-      filtered.forEach(p => {
-        html += `
-          <div class="product-card">
-            <div class="product-image">
-              ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${p.emoji || '📦'}'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='var(--gold)'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center';">` : p.emoji}
-            </div>
-            <div class="product-brand">${p.brand}</div>
-            <div class="product-type-badge">${p.type}</div>
-            <div class="product-info">
-              <h3>${p.name}</h3>
-              <div class="type">${p.type}</div>
-              <div class="desc">${p.desc || ''}</div>
-              <div class="price">$${p.price.toFixed(2)}</div>
-              <button class="add-btn" onclick="addToCart(${p.id})">
-                <i class="fa-solid fa-cart-plus"></i> Add to Cart
-              </button>
-            </div>
-          </div>
-        `;
-      });
-      grid.innerHTML = html;
-    }
-
-    document.getElementById('brandFilters').addEventListener('click', function(e) {
-      if (e.target.classList.contains('filter-btn')) {
-        document.querySelectorAll('#brandFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
-        e.target.classList.add('active');
-        currentBrand = e.target.dataset.brand;
-        renderProducts();
-      }
-    });
-
-    document.getElementById('typeFilters').addEventListener('click', function(e) {
-      if (e.target.classList.contains('filter-btn')) {
-        document.querySelectorAll('#typeFilters .filter-btn').forEach(btn => btn.classList.remove('active'));
-        e.target.classList.add('active');
-        currentType = e.target.dataset.type;
-        renderProducts();
-      }
-    });
-
-    /* ============================================
-       NOTIFICATION
-       ============================================ */
-    function showNotification(msg) {
-      const old = document.querySelector('.notif');
-      if (old) old.remove();
-      const notif = document.createElement('div');
-      notif.className = 'notif';
-      notif.textContent = msg;
-      notif.style.cssText = `
-        position: fixed; top: 80px; right: 20px; background: #151a23;
-        color: #fff; padding: 14px 20px; border-radius: 10px;
-        border-left: 4px solid #d4af37; box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-        font-family: Poppins, sans-serif; z-index: 2000;
-        transform: translateX(120%); opacity: 0; transition: 0.4s;
-      `;
-      document.body.appendChild(notif);
-      setTimeout(() => { notif.style.transform = 'translateX(0)'; notif.style.opacity = '1'; }, 50);
-      setTimeout(() => {
-        notif.style.transform = 'translateX(120%)'; notif.style.opacity = '0';
-        setTimeout(() => notif.remove(), 400);
-      }, 3000);
-    }
-
-    /* ============================================
-       INIT
-       ============================================ */
-    document.addEventListener('DOMContentLoaded', () => {
-      renderProducts();
-      updateCartUI();
-    });
-  </script>
+document.addEventListener('DOMContentLoaded',function(){
+renderProducts();
+updateCartUI();
+});
+</script>
 </body>
 </html>
