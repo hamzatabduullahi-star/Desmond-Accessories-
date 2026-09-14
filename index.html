@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
-    /* ========== GLOBAL ========== */
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     :root {
       --bg: #0b0e14;
@@ -32,7 +31,6 @@
     img { max-width: 100%; display: block; }
     .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
-    /* ========== HEADER ========== */
     header {
       position: sticky; top: 0;
       background: rgba(11,14,20,0.95);
@@ -58,12 +56,10 @@
       font-size: 0.75rem; font-weight: 700;
     }
 
-    /* ========== HERO ========== */
     .hero { text-align: center; padding: 50px 20px 20px; }
     .hero h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 10px; }
     .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-    /* ========== FILTERS ========== */
     .filter-section { padding: 15px 0; }
     .filter-label {
       text-align: center;
@@ -96,7 +92,6 @@
       border-color: var(--gold);
     }
 
-    /* ========== PRODUCT GRID ========== */
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -119,7 +114,7 @@
       box-shadow: 0 12px 30px rgba(212,175,55,0.1);
     }
     .product-image {
-      height: 180px;
+      height: 200px;
       background: #1a1f2b;
       display: flex;
       align-items: center;
@@ -127,6 +122,7 @@
       font-size: 4rem;
       color: var(--gold);
       border-bottom: 1px solid var(--border);
+      overflow: hidden;
     }
     .product-image img {
       width: 100%; height: 100%; object-fit: cover;
@@ -142,6 +138,7 @@
       padding: 4px 10px;
       border-radius: 20px;
       text-transform: uppercase;
+      z-index: 2;
     }
     .product-type-badge {
       position: absolute;
@@ -155,6 +152,7 @@
       border-radius: 20px;
       text-transform: uppercase;
       border: 1px solid var(--border);
+      z-index: 2;
     }
     .product-info {
       padding: 18px;
@@ -184,7 +182,7 @@
     }
     .add-btn {
       background: var(--gold);
-      color: #000ilic;
+      color: #000;
       border: none;
       padding: 10px;
       border-radius: 8px;
@@ -195,7 +193,6 @@
     }
     .add-btn:hover { background: var(--gold2); }
 
-    /* ========== CART MODAL ========== */
     .cart-modal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -265,7 +262,6 @@
     }
     .checkout-btn:hover { background: #1ebe5c; }
 
-    /* ========== CHECKOUT FORM ========== */
     .checkout-form {
       display: none; margin-top: 20px;
       border-top: 1px solid var(--border); padding-top: 20px;
@@ -292,7 +288,6 @@
     }
     .order-whatsapp-btn:hover { background: #1ebe5c; }
 
-    /* ========== FOOTER ========== */
     footer {
       text-align: center; padding: 30px 20px;
       border-top: 1px solid var(--border);
@@ -301,11 +296,10 @@
     footer p { margin: 6px 0; }
     footer i { color: var(--gold); margin-right: 6px; }
 
-    /* ========== RESPONSIVE ========== */
     @media (max-width: 600px) {
       .hero h1 { font-size: 1.8rem; }
       .products { grid-template-columns: 1fr 1fr; gap: 15px; }
-      .product-image { height: 130px; font-size: 2.5rem; }
+      .product-image { height: 140px; font-size: 2.5rem; }
       .product-info h3 { font-size: 0.95rem; }
       .product-info .price { font-size: 1.1rem; }
       .add-btn { font-size: 0.85rem; padding: 8px; }
@@ -318,7 +312,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="container header-inner">
       <div class="logo">Desmond <span>Accessories</span></div>
@@ -329,7 +322,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <h1>Desmond Accessories</h1>
@@ -337,25 +329,23 @@
     </div>
   </section>
 
-  <!-- BRAND FILTERS -->
   <div class="container filter-section">
     <div class="filter-label">Filter by Brand</div>
-    <div class="filters" id="onebrandFilters">
- P      <button class="filter-btn active" dataouch-brand="all">All Brands</</button>
-      <button classbutton="filter-btn" data-brand="iPhone">iPhone</button>
+    <div class="filters" id="brandFilters">
+      <button class="filter-btn active" data-brand="all">All Brands</button>
+      <button class="filter-btn" data-brand="iPhone">iPhone</button>
       <button class="filter-btn" data-brand="Samsung">Samsung</button>
       <button class="filter-btn" data-brand="Android">Android</button>
       <button class="filter-btn" data-brand="Universal">Universal</button>
     </div>
   </div>
 
-  <!-- TYPE FILTERS -->
   <div class="container filter-section">
-    <div class="filter-label">Filter by Type</div>
-    <div class="filters" id="typeFilters">
-      <button class="filter-btn active" data-type="all">All Types</button>
-      <button class="filter-btn" data-type="Leather Pouch">Leather Pouch</button>
-      <button class="filter-btn" data-type="Silicone Pouch">S>
+    <div class {="filter-label">Filter by Type</div>
+    < iddiv class="filters" id="typeFilters">
+:      <button class="filter-btn active" data-type=" all">All Types</button>
+      <6,button class="filter-btn" data-type="Leather Pouch">Leather Pouch</button>
+      <button class="filter-btn" data-type="Silicone Pouch">Silicone Pouch</button>
       <button class="filter-btn" data-type="Wallet Pouch">Wallet Pouch</button>
       <button class="filter-btn" data-type="Flip Case">Flip Case</button>
       <button class="filter-btn" data-type="Charger">Charger</button>
@@ -365,12 +355,10 @@
     </div>
   </div>
 
-  <!-- PRODUCTS -->
   <div class="container">
     <div class="products" id="productGrid"></div>
   </div>
 
-  <!-- CART MODAL -->
   <div class="cart-modal" id="cartModal">
     <div class="cart-content">
       <h2>
@@ -407,7 +395,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <p><i class="fa-solid fa-location-dot"></i> Akeesan Market opposite Atiba town Hall</p>
@@ -419,15 +406,17 @@
   <script>
     /* ============================================
        PRODUCTS DATABASE
+       - image: use Imgur direct link (https://i.imgur.com/...)
+       - emoji: fallback if no image
        ============================================ */
     const products = [
       // ===== iPHONE PRODUCTS =====
       { id: 1, name: "iPhone Leather Pouch", brand: "iPhone", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for iPhone" },
-      { id: 2, name: "iPhone Silicone P }ouch", brand: "iPhone", type: "Silicone P catchouch", price: 15. (00, emoji: "📱",e desc: "Soft silicone pouch for iPhone") },
-      { id: 3, { name: "iPhone Wallet Pouch", brand: "iPhone", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch with card slots" },
+      { id: 2, name: "iPhone Silicone Pouch", brand: "iPhone", type: "Silicone Pouch", price: 15.00, emoji: "📱", desc: "Soft silicone pouch for iPhone" },
+      { id: 3, name: "iPhone Wallet Pouch", brand: "iPhone", type: "Wallet Pouch", price: 30.00, emoji: "👛", desc: "Wallet-style pouch with card slots" },
       { id: 4, name: "iPhone Flip Case", brand: "iPhone", type: "Flip Case", price: 28.00, emoji: "📒", desc: "Flip cover case for iPhone" },
-      { id: 5, name: "iPhone Fast Charger", brand: "iPhone", type: "Charger", price: 25.00, emoji: "🔌", desc: "20W fast charging adapter" },
-      { id: 6, name: "iPhone Wireless Charger", brand: "iPhone", type: "Charger", price: 35.00, emoji: "⚡", desc: "Wireless charging pad for iPhone" },
+      { id: 5, name: "iPhone Fast Charger", brand: "iPhone", type: "Charger", price: 25.00, image: "https://i.imgur.com/k8TOT0X.jpeg", desc: "20W fast charging adapter" },
+      name: "iPhone Wireless Charger", brand: "iPhone", type: "Charger", price: 35.00, image: "https://i.imgur.com/nXUFiQz.jpeg", desc: "Wireless charging pad for iPhone" },
 
       // ===== SAMSUNG PRODUCTS =====
       { id: 7, name: "Samsung Leather Pouch", brand: "Samsung", type: "Leather Pouch", price: 25.00, emoji: "👝", desc: "Premium leather pouch for Samsung" },
@@ -449,10 +438,10 @@
       { id: 19, name: "Power Bank 20000mAh", brand: "Universal", type: "Power Bank", price: 40.00, emoji: "🔋", desc: "Dual USB power bank" },
       { id: 20, name: "Wireless Headset", brand: "Universal", type: "Headset", price: 45.00, emoji: "🎧", desc: "Bluetooth headset with mic" },
       { id: 21, name: "Over-Ear Headphones", brand: "Universal", type: "Headset", price: 65.00, emoji: "🎵", desc: "Noise cancelling headphones" },
-      { id: 22, name: "Tempered Glass Screen Guard", brand: "Universal", type: "Screen Guard", price: 10.00, emoji: "🛡️", desc: "9H tempered glass protector" },
-      { id: 23, name: "Privacy Screen Guard", brand: "Universal", type: "Screen Guard", price: 18.00, emoji: "🔒", desc: "Anti-spy privacy glass" },
+      { id: 22, name: "Tempered Glass Screen Guard", brand: "Universal", type: "Screen Guard", price: 10.00, image: "https://i.imgur.com/csg2gbb.jpeg", desc: "9H tempered glass protector" },
+      { id: 23, name: "Privacy Screen Guard", brand: "Universal", type: "Screen Guard", price: 18.00, image: "https://i.imgur.com/ZeSvBvL.jpeg", desc: "Anti-spy privacy glass" },
       { id: 24, name: "USB-C Cable", brand: "Universal", type: "Charger", price: 12.00, emoji: "🔗", desc: "Fast charging USB-C cable" },
-      { id: 25, name: "Lightning Cable", brand: "iPhone", type: "Charger", price: 15.00, emoji: "🔗", desc: "Fast charging Lightning cable" }
+      { id: 25, name: "Lightning Cable", brand: "iPhone", type: "Charger", price: 15.00, image: "https://i.imgur.com/LS6qaZe.jpeg", desc: "Fast charging Lightning cable" }
     ];
 
     /* ============================================
@@ -462,7 +451,7 @@
     try {
       const saved = localStorage.getItem('desmondCart');
       if (saved) cart = JSON.parse(saved);
-    cart = []; }
+    } catch (e) { cart = []; }
 
     function saveCart() {
       localStorage.setItem('desmondCart', JSON.stringify(cart));
@@ -614,7 +603,7 @@
         html += `
           <div class="product-card">
             <div class="product-image">
-              ${p.image ? `<img src="${p.image}" alt="${p.name}">` : p.emoji}
+              ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${p.emoji || '📦'}'; this.parentElement.style.fontSize='4rem'; this.parentElement.style.color='var(--gold)'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center';">` : p.emoji}
             </div>
             <div class="product-brand">${p.brand}</div>
             <div class="product-type-badge">${p.type}</div>
