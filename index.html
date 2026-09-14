@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desmond Accessories - Order Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    /* ========== GLOBAL ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    :root {
+      --bg: #0b0e14;
+      --card: #151a23;
+      --gold: #d4af37;
+      --gold2: #f6d365;
+      --text: #e0e0e0;
+      --text-muted: #8892a0;
+      --border: rgba(255,255,255,0.08);
+      --radius: 14px;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+    /* ========== HEADER ========== */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(11,14,20,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 12px 0;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .logo span { color: #fff; font-weight: 300; }
+    .cart-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+    .cart-btn:hover { background: var(--gold2); transform: scale(1.02); }
+    .cart-count {
+      background: #e63946;
+      color: #fff;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .hero p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ========== PRODUCT GRID ========== */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 30px 0 60px;
+    }
+    .product-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 12px 30px rgba(212,175,55,0.1);
+    }
+    .product-image {
+      height: 180px;
+      background: #1a1f2b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border);
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .product-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    .product-info .desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .product-info .price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .add-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: auto;
+    }
+    .add-btn:hover { background: var(--gold2); }
+
+    /* ========== CART MODAL ========== */
+    .cart-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .cart-modal.open { display: flex; }
+    .cart-content {
+      background: var(--card);
+      border-radius: var(--radius);
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 25px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .cart-content h2 {
+      color: var(--gold);
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .close-cart {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cart-item-info .emoji { font-size: 1.8rem; }
+    .cart-item-info .name { font-weight: 500; }
+    .cart-item-info .price { font-size: 0.9rem; color: var(--gold); }
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .qty-btn {
+      width: 30px; height: 30px;
+      border: none;
+      background: var(--gold);
+      color: #000;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .qty-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .qty { min-width: 25px; text-align: center; font-weight: 600; }
+    .remove-btn {
+      background: #e63946;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 20px 0;
+      color: var(--gold);
+    }
+    .checkout-btn {
+      width: 100%;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+    .checkout-btn:hover { background: #1ebe5c; }
+
+    /* ========== CHECKOUT FORM ========== */
+    .checkout-form {
+      display: none;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+    .checkout-form.open { display: block; }
+    .checkout-form h3 { margin-bottom: 12px; color: var(--gold); }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0b0e14;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .form-group textarea { resize: vertical; min-height: 70px; }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .order-whatsapp-btn {
+      width: 100%;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .order-whatsapp-btn:hover { background: #1ebe5c; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .products { grid-template-columns: 1fr 1fr; gap: 15px; }
+      .product-image { height: 130px; font-size: 2.5rem; }
+      .product-info h3 { font-size: 1rem; }
+      .product-info .price { font-size: 1.1rem; }
+      .add-btn { font-size: 0.85rem; padding: 8px; }
+      .cart-content { padding: 18px; }
+      .cart-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .cart-item-actions { width: 100%; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">Desmond <span>Accessories</span></div>
+      <button class="cart-btn" onclick="toggleCart()">
+        <i class="fa-solid fa-cart-shopping"></i> Cart
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Desmond Accessories</h1>
+      <p>Chargers, pouches, headsets, headphones, power banks, screen guards, and more — delivered to your doorstep.</p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <div class="container">
+    <div class="products" id="productGrid">
+      <!-- Products will be injected by JavaScript -->
+    </div>
+  </div>
+
+  <!-- CART MODAL -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+      <h2>
+        Your Cart
+        <button class="close-cart" onclick="toggleCart()">&times;</button>
+      </h2>
+      <div id="cartItems"></div>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="checkout-btn" onclick="showCheckout()">
+        <i class="fa-solid fa-credit-card"></i> Proceed to Checkout
+      </button>
+
+      <!-- CHECKOUT FORM -->
+      <div class="checkout-form" id="checkoutForm">
+        <h3>Delivery Details</h3>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="custName" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="custPhone" placeholder="Your phone" required>
+        </div>
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <textarea id="custAddress" placeholder="Street, city, state" required></textarea>
+        </div>
+        <button class="order-whatsapp-btn" onclick="orderViaWhatsApp()">
+          <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      &copy; 2026 Desmond Accessories. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================
+       PRODUCTS DATABASE
+       Edit this array to add/remove products.
+       You can use emoji or image URL.
+       For images: { image: "your-image.jpg" }
+       ============================================ */
+    const products = [
+      { id: 1, name: "Fast Charger", price: 25.00, emoji: "🔌", desc: "20W fast charging adapter" },
+      { id: 2, name: "Phone Pouch", price: 15.00, emoji: "👝", desc: "Premium leather pouch" },
+      { id: 3, name: "Wireless Headset", price: 45.00, emoji: "🎧", desc: "Bluetooth headset with mic" },
+      { id: 4, name: "Over-Ear Headphones", price: 65.00, emoji: "🎵", desc: "Noise cancelling headphones" },
+      { id: 5, name: "Power Bank 20000mAh", price: 40.00, emoji: "🔋", desc: "Dual USB power bank" },
+      { id: 6, name: "Screen Guard", price: 10.00, emoji: "📱", desc: "Tempered glass protector" },
+      { id: 7, name: "USB-C Cable", price: 12.00, emoji: "🔗", desc: "Fast charging cable" },
+      { id: 8, name: "Car Charger", price: 18.00, emoji: "🚗", desc: "Dual port car charger" }
+    ];
+
+    /* ============================================
+       CART SYSTEM (uses localStorage)
+       ============================================ */
+    let cart = [];
+    try {
+      const saved = localStorage.getItem('desmondCart');
+      if (saved) cart = JSON.parse(saved);
+    } catch (e) { cart = []; }
+
+    function saveCart() {
+      localStorage.setItem('desmondCart', JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          emoji: product.emoji || '📦',
+          quantity: 1
+        });
+      }
+      saveCart();
+      showNotification(`${product.name} added to cart!`);
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+    }
+
+    function updateQuantity(productId, change) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      const newQty = item.quantity + change;
+      if (newQty <= 0) {
+        removeFromCart(productId);
+        return;
+      }
+      item.quantity = newQty;
+      saveCart();
+    }
+
+    function updateCartUI() {
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartCount').textContent = totalItems;
+
+      const cartItemsDiv = document.getElementById('cartItems');
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px 0;">Your cart is empty.</p>';
+        document.getElementById('cartTotal').textContent = '$0.00';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        html += `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <span class="emoji">${item.emoji}</span>
+              <div>
+                <div class="name">${item.name}</div>
+                <div class="price">$${item.price.toFixed(2)}</div>
+              </div>
+            </div>
+            <div class="cart-item-actions">
+              <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>−</button>
+              <span class="qty">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+              <button class="remove-btn" onclick="removeFromCart(${item.id})">✕</button>
+            </div>
+          </div>
+        `;
+      });
+      cartItemsDiv.innerHTML = html;
+      document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+    }
+
+    function toggleCart() {
+      document.getElementById('cartModal').classList.toggle('open');
+    }
+
+    function showCheckout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      document.getElementById('checkoutForm').classList.toggle('open');
+    }
+
+    /* ============================================
+       WHATSAPP ORDER
+       Replace the number below with your own.
+       Format: country code + number, no + or spaces.
+       Example: 2348012345678
+       ============================================ */
+    const WHATSAPP_NUMBER = '2348012345678'; // <-- CHANGE THIS
+
+    function orderViaWhatsApp() {
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const address = document.getElementById('custAddress').value.trim();
+
+      if (!name || !phone || !address) {
+        alert('Please fill in all delivery details.');
+        return;
+      }
+
+      let message = '🛒 *NEW ORDER - Desmond Accessories*%0A%0A';
+      message += '👤 *Customer:* ' + name + '%0A';
+      message += '📞 *Phone:* ' + phone + '%0A';
+      message += '📍 *Address:* ' + address + '%0A%0A';
+      message += '📦 *Items:*%0A';
+
+      let total = 0;
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        message += `• ${item.emoji} ${item.name} x${item.quantity} = $${itemTotal.toFixed(2)}%0A`;
+      });
+
+      message += `%0A💰 *Total:* $${total.toFixed(2)}%0A%0A`;
+      message += 'Thank you!';
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+      window.open(url, '_blank');
+
+      // Clear cart after order
+      cart = [];
+      saveCart();
+      document.getElementById('checkoutForm').classList.remove('open');
+      toggleCart();
+    }
+
+    /* ============================================
+       RENDER PRODUCTS
+       ============================================ */
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      let html = '';
+      products.forEach(p => {
+        html += `
+          <div class="product-card">
+            <div class="product-image">
+              ${p.image ? `<img src="${p.image}" alt="${p.name}">` : p.emoji}
+            </div>
+            <div class="product-info">
+              <h3>${p.name}</h3>
+              <div class="desc">${p.desc || ''}</div>
+              <div class="price">$${p.price.toFixed(2)}</div>
+              <button class="add-btn" onclick="addToCart(${p.id})">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+
+    /* ============================================
+       NOTIFICATION
+       ============================================ */
+    function showNotification(msg) {
+      const old = document.querySelector('.notif');
+      if (old) old.remove();
+      const notif = document.createElement('div');
+      notif.className = 'notif';
+      notif.textContent = msg;
+      notif.style.cssText = `
+        position: fixed; top: 80px; right: 20px; background: #151a23;
+        color: #fff; padding: 14px 20px; border-radius: 10px;
+        border-left: 4px solid #d4af37; box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        font-family: Poppins, sans-serif; z-index: 2000;
+        transform: translateX(120%); opacity: 0; transition: 0.4s;
+      `;
+      document.body.appendChild(notif);
+      setTimeout(() => { notif.style.transform = 'translateX(0)'; notif.style.opacity = '1'; }, 50);
+      setTimeout(() => {
+        notif.style.transform = 'translateX(120%)'; notif.style.opacity = '0';
+        setTimeout(() => notif.remove(), 400);
+      }, 3000);
+    }
+
+    /* ============================================
+       INIT
+       ============================================ */
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      updateCartUI();
+    });
+  </script>
+</body>
+</html>
